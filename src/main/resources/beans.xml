@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+
+<beans>
+    <component-scan base-package="com.theodore.service"/>
+
+    <bean id="jdbcAccountDaoImpl" class="com.theodore.dao.impl.JdbcAccountDaoImpl">
+        <property name="ConnectionUtils" ref="connectionUtils"></property>
+    </bean>
+
+
+    <bean id="connectionUtils" class="com.theodore.utils.ConnectionUtils"></bean>
+
+    <bean id="transactionManager" class="com.theodore.utils.TransactionManager">
+        <property name="ConnectionUtils" ref="connectionUtils"></property>
+    </bean>
+
+    <bean id="proxyFactory" class="com.theodore.factory.ProxyFactory">
+        <property name="TransactionManager" ref="transactionManager"></property>
+    </bean>
+
+</beans>
